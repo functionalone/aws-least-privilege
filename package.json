@@ -1,0 +1,49 @@
+{
+  "name": "xray-least-privilege",
+  "private": true,
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=6.10.0"
+  },
+  "description": "Scan xray traces to extract the proper minimal permissions needed for a role",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha   ./dist/test/**/*.test.js",
+    "pretest": "tsc",
+    "tsc": "tsc",
+    "build": "tsc"    
+  },
+  "author": "Functional One",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "aws",
+    "aws lambda",
+    "x-ray",
+    "least privilege"
+  ],
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "commander": "^2.12.2",
+    "lodash": "^4.17.4",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "0.0.24",
+    "@types/bluebird": "^3.5.19",
+    "@types/chai": "^4.0.3",
+    "@types/core-js": "^0.9.42",
+    "@types/lodash": "^4.14.92",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.27",
+    "@types/winston": "^2.3.7",
+    "aws-sdk": "^2.176.0",
+    "chai": "^4.1.2",
+    "mocha": "^4.1.0",    
+    "tslint": "^5.6.0",
+    "typescript": "^2.6.1"
+  }
+}
