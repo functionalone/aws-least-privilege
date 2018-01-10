@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import { getXrayTraces, parseXrayTrace, FunctionToActionsMap, getFunctionActionMapFromXray, 
-    ResourceActionMap, createIAMPolicyDoc } from '../main/xray-trace-fetcher';
+    ResourceActionMap, createIAMPolicyDoc } from '../lib/xray-trace-fetcher';
 
 // tslint:disable:max-line-length
 // tslint:disable-next-line:no-var-requires

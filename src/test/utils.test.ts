@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import { extractRegion } from '../main/aws-segments/utils';
+import { extractRegion } from '../lib/aws-segments/utils';
 
 describe('util test', function() {
 

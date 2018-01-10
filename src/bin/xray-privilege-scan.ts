@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import * as program from 'commander';
-import { scanXrayAndSavePolicyDocs } from '../main/xray-trace-fetcher';
-import { logger, changeConsoleLevel } from '../main/logger';
+import { scanXrayAndSavePolicyDocs } from '../lib/xray-trace-fetcher';
+import { logger, changeConsoleLevel } from '../lib/logger';
 import {isEmpty} from 'lodash';
 
 // tslint:disable-next-line:no-var-requires

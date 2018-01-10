@@ -6,10 +6,11 @@ import * as BBPromise from 'bluebird';
 import { IamPolicyDocument, IamStatement } from './aws-segments/iam-policy';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
+import {Trace} from 'aws-sdk/clients/xray';
 
 const DEF_TIME_RANGE = 60;
 
-interface GetXrayTracesConf {
+export interface GetXrayTracesConf {
   /**
    * start time to search for. If not specified will do a "last x min search"
    */
@@ -67,7 +68,7 @@ export async function getXrayTraces(conf?: GetXrayTracesConf) {
       }
       return null;
     }, { concurrency: 10 });
-    let traces: AWS.XRay.Trace[] = [];
+    let traces: Trace[] = [];
     for (const res of batchResults) {
       if (res) {
         logger.debug("batchGetTraces result: ", res);
@@ -222,3 +223,5 @@ export async function scanXrayAndSavePolicyDocs(conf?: GetXrayTracesConf) {
   }
   return res;
 }
+
+// export XRay.Trace;

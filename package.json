@@ -1,23 +1,25 @@
 {
-  "name": "xray-least-privilege",
+  "name": "aws-least-privilege",
   "private": true,
   "version": "0.1.0",
   "engines": {
     "node": ">=6.10.0"
   },
-  "description": "Scan xray traces to extract the proper minimal permissions needed for a role",
+  "description": "Scan xray traces to extract the proper minimal permissions needed for an application role.",
   "main": "dist/index.js",
   "scripts": {
+    "clean": "rimraf dist",
     "test": "mocha   ./dist/test/**/*.test.js",
-    "pretest": "tsc",
-    "tsc": "tsc",
-    "build": "tsc"    
+    "pretest": "npm run compile",
+    "compile": "tsc",
+    "watch": "tsc -w",
+    "prepublishOnly": "npm run clean && npm run compile"
   },
   "author": "Functional One",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/functionalone/aws-least-privilege"
   },
   "keywords": [
     "aws",
@@ -29,7 +31,8 @@
     "bluebird": "^3.5.1",
     "commander": "^2.12.2",
     "lodash": "^4.17.4",
-    "winston": "^2.4.0"
+    "winston": "^2.4.0",
+    "aws-sdk": "^2.176.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "0.0.24",
@@ -39,11 +42,25 @@
     "@types/lodash": "^4.14.92",
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.27",
-    "@types/winston": "^2.3.7",
-    "aws-sdk": "^2.176.0",
+    "@types/winston": "^2.3.7",    
     "chai": "^4.1.2",
-    "mocha": "^4.1.0",    
+    "mocha": "^4.1.0",
+    "rimraf": "^2.6.2",
     "tslint": "^5.6.0",
     "typescript": "^2.6.1"
-  }
+  },
+  "files": [
+    "dist/index.*",
+    "dist/lib/**",
+    "dist/bin/**",
+    "src/",
+    "*.md"
+  ],
+  "bin": {
+    "xray-privilege-scan": "./dist/bin/xray-privilege-scan.js"
+  },
+  "typescript": {
+    "definition": "dist/index.d.ts"
+  },
+  "typings": "dist/index.d.ts"
 }
