@@ -1,4 +1,4 @@
-X-Ray Least Privilege
+AWS Least Privilege
 ===================
 
 Use AWS X-Ray to reach Least Privilege.
@@ -8,23 +8,23 @@ AWS X-Ray provides in-depth information about service api calls executed via the
 ## Installation
 
 ```
-npm install -g xray-least-privilege
+npm install -g aws-least-privilege
 ```
 
 ## Credential Setup
 
-xray-least-privilege uses the AWS Nodejs SDK internally and will use the same credential mechanism as used by the SDK. It will automatically use credentials from the AWS shared credential file. See: [AWS SDK Docs](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) for more details. The user used to run xray-least-privilege should have the AWS managed policy: `AWSXrayReadOnlyAccess`. 
+xray-privilege-scan uses the AWS Nodejs SDK internally and will use the same credential mechanism as used by the SDK. It will automatically use credentials from the AWS shared credential file. See: [AWS SDK Docs](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) for more details. The user used to run xray-privilege-scan should have the AWS managed policy: `AWSXrayReadOnlyAccess`. 
 
 ## Usage and command line options
 
 To list all the options run:
 
-`xray-least-privilege --help`
+`xray-privilege-scan --help`
 
 All command line options are optional:
 
 ```
-  Usage: xray-least-privilege [options]
+  Usage: xray-privilege-scan [options]
 
 
   Options:
@@ -39,10 +39,10 @@ All command line options are optional:
 Example usage to scan last 12 hours of X-Ray traces with verbose output:
 
 ```
-xray-least-privilege -v -r 720
+xray-privilege-scan -v -r 720
 ```
 
-Once completed `xray-least-privilege` will generate a policy document per Lambda Function. Each document will be named with a unique id of the form:
+Once completed `xray-privilege-scan` will generate a policy document per Lambda Function. Each document will be named with a unique id of the form:
 
 `0fcacc5b207ffcd533267d2020962975.policy.json`
 
