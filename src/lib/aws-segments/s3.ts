@@ -1,14 +1,17 @@
-import {SegmentParseFunc} from './index';
+import { SegmentParseFunc } from './index';
 import { ResourceActionMap } from '../xray-trace-fetcher';
-import {isEmpty} from 'lodash';
-import {logger} from '../logger';
+import { isEmpty } from 'lodash';
+import { logger } from '../logger';
 
 /**
  * Map which is used to replace functions which are named differently to the IAM naming
+ * See also: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html 
  */
 const OPS_REPLACERS: {[i: string]: string} = {
   SetObjectTagging: "PutObjectTagging", //java uses SetObjectTagging
   ListObjectsV2: "ListObjects",
+  CreateMultipartUpload: "PutObject",
+  InitiateMultipartUpload: "PutObject",
 };
 
 // tslint:disable:jsdoc-format
@@ -39,15 +42,15 @@ const OPS_REPLACERS: {[i: string]: string} = {
  * @param segmentDoc 
  * @param actionsMap 
  */
-const parseSegment: SegmentParseFunc = function(segmentDoc: any, actionsMap: ResourceActionMap, functionArn: string) {
+const parseSegment: SegmentParseFunc = function (segmentDoc: any, actionsMap: ResourceActionMap, functionArn: string) {
   const aws: any = segmentDoc.aws;
-  if(isEmpty(aws) || !aws.bucket_name) {
+  if (isEmpty(aws) || !aws.bucket_name) {
     logger.warn("Couldn't extract S3 bucket info for segment document: ", segmentDoc);
     return;
   }
   const arn = `arn:aws:s3:::${aws.bucket_name}/*`;
   let actions = actionsMap.get(arn);
-  if(!actions) {
+  if (!actions) {
     actions = new Set();
     actionsMap.set(arn, actions);
   }

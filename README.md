@@ -11,9 +11,11 @@ AWS X-Ray provides in-depth information about service api calls executed via the
 npm install -g aws-least-privilege
 ```
 
+This will install the command line tool: `xray-privilege-scan`.
+
 ## Credential Setup
 
-xray-privilege-scan uses the AWS Nodejs SDK internally and will use the same credential mechanism as used by the SDK. It will automatically use credentials from the AWS shared credential file. See: [AWS SDK Docs](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) for more details. The user used to run xray-privilege-scan should have the AWS managed policy: `AWSXrayReadOnlyAccess`. 
+The cli tool uses AWS Nodejs SDK internally and will use the same credential mechanism as used by the SDK. It will automatically use credentials from the AWS shared credential file. See: [AWS SDK Docs](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) for more details. The user used to run the cli should have the AWS managed policy: `AWSXrayReadOnlyAccess`. 
 
 ## Usage and command line options
 
