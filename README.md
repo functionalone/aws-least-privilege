@@ -3,7 +3,7 @@ AWS Least Privilege
 
 Use AWS X-Ray to reach Least Privilege.
 
-AWS X-Ray provides in-depth information about service api calls executed via the AWS SDK. Using this information, it is possible to build a runtime profile regarding what AWS resources and actions are actually used by an application. This project aims at stream line the process of collecting runtime information from X-Ray and reaching Least Privilege for a given application. The project is currently focused on AWS Lambda but can easily be applied for other applications which utilize AWS Roles (applications on EC2 or ECS).
+AWS X-Ray provides in-depth information about service API calls executed via the AWS SDK. Using this information, it is possible to build a runtime profile regarding the AWS resources and actions that are actually used by an application. This project aims to streamline the process of collecting runtime information from X-Ray and reaching Least Privilege for a given application. The project is currently focused on AWS Lambda but can easily be applied to other applications that utilize AWS Roles (applications on EC2 or ECS).
 
 ## Installation
 
