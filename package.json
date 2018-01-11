@@ -1,6 +1,6 @@
 {
   "name": "aws-least-privilege",
-  "private": true,
+  "private": false,
   "version": "0.1.0",
   "engines": {
     "node": ">=6.10.0"
