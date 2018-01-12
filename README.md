@@ -48,6 +48,6 @@ Once completed `xray-privilege-scan` will generate a policy document per Lambda 
 
 Additionally it will printout a summary to standard out specifying the function names and documents generated. 
 
-The policy document is a json document conforming to the AWS Policy language with an additional field of: `Description`. The `Description` field will contain the AWS Arn of the Lambda Function this policy is for. The `Description` field is not part of the AWS Policy language and should be removed if copying the policy to AWS IAM.
+The policy document is a json document conforming to the AWS Policy language with an additional field of: `Description`. The `Description` field will contain the AWS ARN of the Lambda Function this policy is for. The `Description` field is not part of the AWS Policy language and should be removed if copying the policy to AWS IAM.
 
 
