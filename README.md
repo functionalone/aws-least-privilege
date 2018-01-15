@@ -3,7 +3,7 @@ AWS Least Privilege
 
 Use AWS X-Ray to reach Least Privilege.
 
-AWS X-Ray provides in-depth information about service API calls executed via the AWS SDK. Using this information, it is possible to build a runtime profile of the AWS resources and actions that are actually used by an application. This project aims to streamline the process of collecting runtime information from X-Ray and reaching Least Privilege for a given application. The project is currently focused on AWS Lambda but can easily be applied to other applications that utilize AWS Roles (applications on EC2 or ECS).
+This project aims to streamline the process of collecting resource usage information from X-Ray and reaching a "Least Privilege" security posture for a given application. AWS X-Ray provides in-depth information about service API calls executed via the AWS SDK. Using this information, it is possible to build a profile of the AWS resources and actions that are actually used by an application and generate a policy document reflecting it.  The project is currently focused on AWS Lambda but can easily be applied to other applications that utilize AWS Roles (applications on EC2 or ECS).
 
 # Installation
 
@@ -93,6 +93,6 @@ Once completed `xray-privilege-scan` will generate a policy document per Lambda 
 
 Additionally it will printout a summary to standard out specifying the function names and documents generated. 
 
-The policy document is a json document conforming to the AWS Policy language with an additional field of: `Description`. The `Description` field will contain the AWS Arn of the Lambda Function this policy is for. The `Description` field is not part of the AWS Policy language and should be removed if copying the policy to AWS IAM.
+The policy document is a json document conforming to the AWS Policy language with an additional field of: `Description`. The `Description` field will contain the AWS ARN of the Lambda Function this policy is for. The `Description` field is not part of the AWS Policy language and should be removed if copying the policy to AWS IAM.
 
 
