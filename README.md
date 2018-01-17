@@ -48,7 +48,7 @@ More info available at the project page: https://github.com/functionalone/aws-xr
 
 ### X-Ray SDK for Python
 
-The X-Ray SDK for Python doesn't expose a direct interface to append parameter whitelist configurations as in the X-Ray Node SDK. But there is an option to modify the whitelist object of the SDK directly as suggested in the following form post: https://forums.aws.amazon.com/message.jspa?messageID=802327#802327 (Note: the `whitelist` object has moved since the post, see the code below)  The Python SDK uses the same parameter whitelist syntax as used by the X-Ray Node SDK, with a slight difference in the way operations are named. Operations are required to start with an uppercase. Use the following procedure to obtain additional parameter whitelist configurations which are not available as part of the X-Ray SDK:
+The X-Ray SDK for Python doesn't expose a direct interface to append parameter whitelist configurations as in the X-Ray Node SDK. But there is an option to modify the whitelist object of the SDK directly as suggested in the following form post: https://forums.aws.amazon.com/message.jspa?messageID=802327#802327 (Note: the `whitelist` object has moved since the post, see the code below)  The Python SDK uses the same parameter whitelist syntax as used by the X-Ray Node SDK, with a slight difference in the way operations are named. Operations are required to start with an uppercase. Use the following to procedure to obtain additional parameter whitelist configurations which are not available as part of the X-Ray SDK:
 
 Copy the s3_whitelist.json from: https://github.com/functionalone/aws-xray-parameter-whitelist-node/blob/master/resources/s3_whitelist.json 
 
