@@ -4,4 +4,9 @@ node_modules
 dist
 #ignore npm pack output
 aws-least-privilege-*.tgz
+#ignore generated policy.json files
+*.policy.json
+#ignore log
+xray-scan.log
+
 
