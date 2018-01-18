@@ -15,7 +15,7 @@
     "watch": "tsc -w",
     "prepublishOnly": "npm run clean && npm run compile"
   },
-  "author": "Functional One",
+  "author": "Functional One, Ltd.",
   "license": "MIT",
   "repository": {
     "type": "git",
