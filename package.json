@@ -16,7 +16,7 @@
     "prepublishOnly": "npm run clean && npm run compile",
     "release": "standard-version"
   },
-  "author": "Functional One",
+  "author": "Functional One, Ltd.",
   "license": "MIT",
   "repository": {
     "type": "git",
