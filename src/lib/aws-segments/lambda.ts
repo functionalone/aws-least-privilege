@@ -12,7 +12,6 @@ const OPS_REPLACERS: {[i: string]: string} = {
   Invoke: "InvokeFunction",
 };
 
-
 // tslint:disable:jsdoc-format
 /**
  * Parse a lambda segement.Lambda segment will look like this:
