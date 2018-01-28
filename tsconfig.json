@@ -10,7 +10,6 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "sourceMap": true,
-    "mapRoot": "dist",
     "newLine": "LF",
     "lib": [
       "es6",
