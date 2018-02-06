@@ -1,0 +1,128 @@
+[
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=ListRolePolicies&RoleName=TestRoleForAWSLeastPriv&Version=2010-05-08",
+    "status": 200,
+    "response": "<ListRolePoliciesResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <ListRolePoliciesResult>\n    <IsTruncated>false</IsTruncated>\n    <PolicyNames>\n      <member>xray-log</member>\n    </PolicyNames>\n  </ListRolePoliciesResult>\n  <ResponseMetadata>\n    <RequestId>6a7d5e26-09bd-11e8-b10f-8386a7471fe0</RequestId>\n  </ResponseMetadata>\n</ListRolePoliciesResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "6a7d5e26-09bd-11e8-b10f-8386a7471fe0",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "373",
+      "Date",
+      "Sun, 04 Feb 2018 15:09:36 GMT"
+    ]
+  },
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=ListAttachedRolePolicies&RoleName=TestRoleForAWSLeastPriv&Version=2010-05-08",
+    "status": 200,
+    "response": "<ListAttachedRolePoliciesResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <ListAttachedRolePoliciesResult>\n    <IsTruncated>false</IsTruncated>\n    <AttachedPolicies>\n      <member>\n        <PolicyArn>arn:aws:iam::123456789012:policy/HelloDemoPolicy</PolicyArn>\n        <PolicyName>HelloDemoPolicy</PolicyName>\n      </member>\n      <member>\n        <PolicyArn>arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole</PolicyArn>\n        <PolicyName>AWSLambdaVPCAccessExecutionRole</PolicyName>\n      </member>\n    </AttachedPolicies>\n  </ListAttachedRolePoliciesResult>\n  <ResponseMetadata>\n    <RequestId>6a5d0594-09bd-11e8-84ac-a1ffc06f8209</RequestId>\n  </ResponseMetadata>\n</ListAttachedRolePoliciesResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "6a5d0594-09bd-11e8-84ac-a1ffc06f8209",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "751",
+      "Date",
+      "Sun, 04 Feb 2018 15:09:37 GMT"
+    ]
+  },
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=GetPolicy&PolicyArn=arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2Fservice-role%2FAWSLambdaVPCAccessExecutionRole&Version=2010-05-08",
+    "status": 200,
+    "response": "<GetPolicyResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <GetPolicyResult>\n    <Policy>\n      <Path>/service-role/</Path>\n      <UpdateDate>2016-02-11T23:15:26Z</UpdateDate>\n      <PolicyId>ANPAJVTME3YLVNL72YR2K</PolicyId>\n      <DefaultVersionId>v1</DefaultVersionId>\n      <PolicyName>AWSLambdaVPCAccessExecutionRole</PolicyName>\n      <IsAttachable>true</IsAttachable>\n      <Description>Provides minimum permissions for a Lambda function to execute while accessing a resource within a VPC - create, describe, delete network interfaces and write permissions to CloudWatch Logs. </Description>\n      <AttachmentCount>1</AttachmentCount>\n      <Arn>arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole</Arn>\n      <CreateDate>2016-02-11T23:15:26Z</CreateDate>\n    </Policy>\n  </GetPolicyResult>\n  <ResponseMetadata>\n    <RequestId>6b360039-09bd-11e8-98ea-d98c6a3f91e6</RequestId>\n  </ResponseMetadata>\n</GetPolicyResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "6b360039-09bd-11e8-98ea-d98c6a3f91e6",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "955",
+      "Date",
+      "Sun, 04 Feb 2018 15:09:37 GMT"
+    ]
+  },
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=GetPolicy&PolicyArn=arn%3Aaws%3Aiam%3A%3A123456789012%3Apolicy%2FHelloDemoPolicy&Version=2010-05-08",
+    "status": 200,
+    "response": "<GetPolicyResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <GetPolicyResult>\n    <Policy>\n      <Path>/</Path>\n      <UpdateDate>2017-11-06T07:38:02Z</UpdateDate>\n      <PolicyId>ANPAJ7ALJBCZ7JLFI55GI</PolicyId>\n      <DefaultVersionId>v2</DefaultVersionId>\n      <PolicyName>HelloDemoPolicy</PolicyName>\n      <IsAttachable>true</IsAttachable>\n      <Description>Policy used by the hello demo</Description>\n      <AttachmentCount>17</AttachmentCount>\n      <Arn>arn:aws:iam::123456789012:policy/HelloDemoPolicy</Arn>\n      <CreateDate>2017-11-05T12:15:47Z</CreateDate>\n    </Policy>\n  </GetPolicyResult>\n  <ResponseMetadata>\n    <RequestId>6c1f9c75-09bd-11e8-b10f-8386a7471fe0</RequestId>\n  </ResponseMetadata>\n</GetPolicyResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "6c1f9c75-09bd-11e8-b10f-8386a7471fe0",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "765",
+      "Date",
+      "Sun, 04 Feb 2018 15:09:39 GMT"
+    ]
+  },
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=GetRolePolicy&PolicyName=xray-log&RoleName=TestRoleForAWSLeastPriv&Version=2010-05-08",
+    "status": 200,
+    "response": "<GetRolePolicyResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <GetRolePolicyResult>\n    <PolicyDocument>%7B%0A%20%20%20%20%22Version%22%3A%20%222012-10-17%22%2C%0A%20%20%20%20%22Statement%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%22Effect%22%3A%20%22Allow%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22Action%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22xray%3APutTelemetryRecords%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22xray%3APutTraceSegments%22%0A%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%22Resource%22%3A%20%22%2A%22%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%5D%0A%7D</PolicyDocument>\n    <RoleName>TestRoleForAWSLeastPriv</RoleName>\n    <PolicyName>xray-log</PolicyName>\n  </GetRolePolicyResult>\n  <ResponseMetadata>\n    <RequestId>6bc7b86b-09bd-11e8-98ea-d98c6a3f91e6</RequestId>\n  </ResponseMetadata>\n</GetRolePolicyResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "6bc7b86b-09bd-11e8-98ea-d98c6a3f91e6",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "921",
+      "Date",
+      "Sun, 04 Feb 2018 15:09:38 GMT"
+    ]
+  },
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=GetPolicyVersion&PolicyArn=arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2Fservice-role%2FAWSLambdaVPCAccessExecutionRole&Version=2010-05-08&VersionId=v1",
+    "status": 200,
+    "response": "<GetPolicyVersionResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <GetPolicyVersionResult>\n    <PolicyVersion>\n      <VersionId>v1</VersionId>\n      <IsDefaultVersion>true</IsDefaultVersion>\n      <Document>%7B%0A%20%20%22Version%22%3A%20%222012-10-17%22%2C%0A%20%20%22Statement%22%3A%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22Effect%22%3A%20%22Allow%22%2C%0A%20%20%20%20%20%20%22Action%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%22logs%3ACreateLogGroup%22%2C%0A%20%20%20%20%20%20%20%20%22logs%3ACreateLogStream%22%2C%0A%20%20%20%20%20%20%20%20%22logs%3APutLogEvents%22%2C%0A%20%20%20%20%20%20%20%20%22ec2%3ACreateNetworkInterface%22%2C%0A%20%20%20%20%20%20%20%20%22ec2%3ADescribeNetworkInterfaces%22%2C%0A%20%20%20%20%20%20%20%20%22ec2%3ADeleteNetworkInterface%22%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%22Resource%22%3A%20%22%2A%22%0A%20%20%20%20%7D%0A%20%20%5D%0A%7D</Document>\n      <CreateDate>2016-02-11T23:15:26Z</CreateDate>\n    </PolicyVersion>\n  </GetPolicyVersionResult>\n  <ResponseMetadata>\n    <RequestId>6c889766-09bd-11e8-8ff2-61a7c8f625da</RequestId>\n  </ResponseMetadata>\n</GetPolicyVersionResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "6c889766-09bd-11e8-8ff2-61a7c8f625da",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "1139",
+      "Date",
+      "Sun, 04 Feb 2018 15:09:39 GMT"
+    ]
+  },
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=GetPolicyVersion&PolicyArn=arn%3Aaws%3Aiam%3A%3A123456789012%3Apolicy%2FHelloDemoPolicy&Version=2010-05-08&VersionId=v2",
+    "status": 200,
+    "response": "<GetPolicyVersionResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <GetPolicyVersionResult>\n    <PolicyVersion>\n      <VersionId>v2</VersionId>\n      <IsDefaultVersion>true</IsDefaultVersion>\n      <Document>%7B%0A%20%20%20%20%22Version%22%3A%20%222012-10-17%22%2C%0A%20%20%20%20%22Statement%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Effect%22%3A%20%22Allow%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Action%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22logs%3ACreateLogGroup%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22logs%3ACreateLogStream%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22logs%3APutLogEvents%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Resource%22%3A%20%22%2A%22%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%5D%0A%7D</Document>\n      <CreateDate>2017-11-06T07:38:02Z</CreateDate>\n    </PolicyVersion>\n  </GetPolicyVersionResult>\n  <ResponseMetadata>\n    <RequestId>791f6683-09bd-11e8-b10f-8386a7471fe0</RequestId>\n  </ResponseMetadata>\n</GetPolicyVersionResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "791f6683-09bd-11e8-b10f-8386a7471fe0",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "1130",
+      "Date",
+      "Sun, 04 Feb 2018 15:10:01 GMT"
+    ]
+  }
+]

@@ -1,16 +1,18 @@
 import { logger } from './logger';
 import * as AWS from 'aws-sdk';
-import { isEmpty, get } from 'lodash';
+import * as _ from 'lodash';
 import { SUPPORTED_SERVICES, AWSSegmentParsers } from './aws-segments/index';
 import * as BBPromise from 'bluebird';
 import { IamPolicyDocument, IamStatement } from './aws-segments/iam-policy';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import {Trace} from 'aws-sdk/clients/xray';
+import { IamPolicyUtils } from './iam-policy-utils';
 
 const DEF_TIME_RANGE = 60;
+export const EXCESSIVE_PERMISSION_FILE = 'excessive_permissions.json';
 
-export interface GetXrayTracesConf {
+export interface ScanXrayTracesConf {
   /**
    * start time to search for. If not specified will do a "last x min search"
    */
@@ -20,12 +22,16 @@ export interface GetXrayTracesConf {
    * Defaults to: 60
    */
   timeRangeMinutes?: number;
+  /**
+   * Perform comparison against the application role and generate an excess permissions report
+   */
+  compareExistingRole?: boolean;
 }
 
 /**
  * Fetch xray traces. Combines the two functions of getTraceSummaries and batchGetTraces including support for pagination.
  */
-export async function getXrayTraces(conf?: GetXrayTracesConf) {
+export async function getXrayTraces(conf?: ScanXrayTracesConf) {
   try {
     logger.info('getXrayTraces: params: ', conf);
     const xray = new AWS.XRay();
@@ -72,7 +78,7 @@ export async function getXrayTraces(conf?: GetXrayTracesConf) {
     for (const res of batchResults) {
       if (res) {
         logger.debug("batchGetTraces result: ", res);
-        if (!isEmpty(res.Traces)) {
+        if (!_.isEmpty(res.Traces)) {
           logger.debug('batchGetTraces count: ', res.Traces!.length);
           traces = traces.concat(res.Traces!);
         }
@@ -105,7 +111,7 @@ function parseSegmentDoc(doc: any, functionMap: FunctionToActionsMap, parentActi
     AWSSegmentParsers[doc.name](doc, parentActionsMap, functionArn!);
   }
   //see if this is a Lambda function. If so it will have aws.function_arn
-  const arn = get(doc, 'aws.function_arn');
+  const arn = _.get(doc, 'aws.function_arn');
   let actionsMap: ResourceActionMap | undefined;
   if (arn) {
     logger.debug('Found arn: %s for Segment: %s', arn, doc.id);
@@ -115,7 +121,7 @@ function parseSegmentDoc(doc: any, functionMap: FunctionToActionsMap, parentActi
       functionMap.set(arn, actionsMap);
     }
   }
-  if (!isEmpty(doc.subsegments)) {
+  if (!_.isEmpty(doc.subsegments)) {
     for (const subsegment of doc.subsegments) {
       parseSegmentDoc(subsegment, functionMap, actionsMap, arn);
     }
@@ -128,14 +134,14 @@ function parseSegmentDoc(doc: any, functionMap: FunctionToActionsMap, parentActi
  * @param functionMap will populate with the found results
  */
 export function parseXrayTrace(trace: AWS.XRay.Trace, functionMap: FunctionToActionsMap): FunctionToActionsMap {
-  if (isEmpty(trace.Segments)) {
+  if (_.isEmpty(trace.Segments)) {
     logger.info('No segments found for TraceId: ', trace.Id);
     return functionMap;
   }
   //we search for lambda segments and then follow into sub segments
   for (const segment of trace.Segments!) {
     const docStr = segment.Document;
-    if (isEmpty(docStr)) {
+    if (_.isEmpty(docStr)) {
       logger.warn("Got segment [id: %s] with empty Document.", segment.Id);
     }
     else {
@@ -146,7 +152,7 @@ export function parseXrayTrace(trace: AWS.XRay.Trace, functionMap: FunctionToAct
 }
 
 export function parseXrayTraces(traces: AWS.XRay.Trace[], functionMap: FunctionToActionsMap): FunctionToActionsMap {
-  if (isEmpty(traces)) {
+  if (_.isEmpty(traces)) {
     return functionMap;
   }
   for (const trace of traces) {
@@ -155,7 +161,7 @@ export function parseXrayTraces(traces: AWS.XRay.Trace[], functionMap: FunctionT
   return functionMap;
 }
 
-export async function getFunctionActionMapFromXray(conf?: GetXrayTracesConf) {
+export async function getFunctionActionMapFromXray(conf?: ScanXrayTracesConf) {
   const traces = await getXrayTraces(conf);
   const map: FunctionToActionsMap = new Map();
   return parseXrayTraces(traces, map);
@@ -201,25 +207,98 @@ export function createIAMPolicyDoc(map: ResourceActionMap, functionArn: string) 
   return doc;
 }
 
+export interface AppExcessPermissions {
+  arn: string;
+  role: string;
+  excessPermissions: IamStatement[];
+}
+
+export async function compareLambdaRoleToPolicy(lambdaArn: string, policy: IamPolicyDocument) {
+  const iamUtils = new IamPolicyUtils();
+  if(!policy.Statement) {
+    return;
+  }
+  const lambda = new AWS.Lambda();
+  const config = await lambda.getFunctionConfiguration({FunctionName: lambdaArn}).promise();
+  if(config.Role)
+  {
+    const roleName = config.Role.substr(config.Role.lastIndexOf('/') + 1);
+    const roleStatements = await iamUtils.getCombinedStatementsForRole(roleName);
+    const excessStatements = iamUtils.checkExcessPolicyPermissions(roleStatements, policy.Statement);
+    if(!_.isEmpty(excessStatements)) {
+      const res: AppExcessPermissions = {
+        arn: lambdaArn,
+        role: config.Role,
+        excessPermissions: excessStatements!,
+      };
+      return res;
+    }
+  }  
+}
+
+export interface GeneratedPolicy {
+  Arn: string;
+  FileName?: string;
+  Policy: IamPolicyDocument;
+}
+
+export interface ScanResult {
+  GeneratedPolicies: GeneratedPolicy[];
+  ExcessPermissions: AppExcessPermissions[];
+}
+
+/**
+ * Will scan xray and return a ScanResult
+ * @param conf 
+ */
+export async function scanXray(conf: ScanXrayTracesConf): Promise<ScanResult> {
+  const map: FunctionToActionsMap = await getFunctionActionMapFromXray(conf);  
+  const res: ScanResult = {
+    GeneratedPolicies: [],
+    ExcessPermissions: [],
+  };
+  const promiseArr: Promise<AppExcessPermissions|undefined>[] = [];
+  for (const entry of map.entries()) {
+    const policyDoc = createIAMPolicyDoc(entry[1], entry[0]);
+    res.GeneratedPolicies.push({
+      Arn: entry[0],
+      Policy: policyDoc,
+    });
+    if(conf.compareExistingRole) {
+      promiseArr.push(compareLambdaRoleToPolicy(entry[0], policyDoc));
+    }    
+  }
+  if(conf.compareExistingRole) {
+    const permissionsRes = await Promise.all(promiseArr);
+    for (const perm of permissionsRes) {
+      if(perm) {
+        res.ExcessPermissions.push(perm);
+      }
+    }    
+  }
+  return res;
+}
+
 /**
  * 
  * @param conf 
  * @return object mapping function arn to file name
  */
-export async function scanXrayAndSavePolicyDocs(conf?: GetXrayTracesConf) {
-  const map: FunctionToActionsMap = await getFunctionActionMapFromXray(conf);  
-  const res: {[i: string]: string} = {};
-  for (const entry of map.entries()) {
-    const policyDoc = createIAMPolicyDoc(entry[1], entry[0]);
+export async function scanXrayAndSaveFiles(conf: ScanXrayTracesConf) {
+  const res = await scanXray(conf);  
+  for (const generatedPolicy of res.GeneratedPolicies) {    
     const hash = crypto.createHash('md5');
-    hash.update(entry[0]);
+    hash.update(generatedPolicy.Arn);
     const fileName = hash.digest('hex') + ".policy.json";
-    res[entry[0]] = fileName;
+    generatedPolicy.FileName = fileName;
     try {
-      fs.writeFileSync(fileName, JSON.stringify(policyDoc, undefined, 2));
+      fs.writeFileSync(fileName, JSON.stringify(generatedPolicy.Policy, undefined, 2));
     } catch (error) {
       logger.error("Failed writing to file: [%s] ",fileName, error);
     }
+  }
+  if(!_.isEmpty(res.ExcessPermissions)) {
+    fs.writeFileSync(EXCESSIVE_PERMISSION_FILE,  JSON.stringify(res.ExcessPermissions, undefined, 2));
   }
   return res;
 }

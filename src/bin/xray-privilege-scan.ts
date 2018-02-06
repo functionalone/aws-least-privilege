@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import * as program from 'commander';
-import { scanXrayAndSavePolicyDocs } from '../lib/xray-trace-fetcher';
+import { scanXrayAndSaveFiles } from '../lib/xray-trace-fetcher';
 import { logger, changeConsoleLevel } from '../lib/logger';
 import {isEmpty} from 'lodash';
+import { EXCESSIVE_PERMISSION_FILE, ScanXrayTracesConf } from '../index';
 
 // tslint:disable-next-line:no-var-requires
 const version = require('./../../package.json').version;
@@ -38,7 +39,8 @@ function parseIntWithError(s: string, def: string) {
 program.version(version)  
   .option('-s, --start-time <timestamp>', 'Start time as Unix timestamp (seconds since 1970-01-01 00:00:00 UTC). Optional: if left out will use: (current time - time range).', parseIntWithError)
   .option('-r, --time-range <minutes>', 'Time range in minutes to scan from start time.', parseIntWithError, 60)
-  .option('-v, --verbose', 'Output verbose logs to the console (info and above).')
+  .option('-c, --compare', 'Compare current role and generated roles. Output a json report.')
+  .option('-v, --verbose', 'Output verbose logs to the console (info and above).')  
   .parse(process.argv);
 // tslint:enable:max-line-length
 
@@ -54,22 +56,38 @@ if(startTime && (startTime < (now - 30*24*60*60*1000) || startTime > (now + 60*1
   helpError();
 }
 
+const conf: ScanXrayTracesConf = {
+  startTime: startTime ? new Date(startTime) : undefined,
+  timeRangeMinutes: program.timeRange,
+};
+
 if(program.verbose) {
   changeConsoleLevel('info');
   logger.info("Console logging set to verbose level: [info]");
 }
-const startDate = startTime ? new Date(startTime) : undefined;
-scanXrayAndSavePolicyDocs({startTime: startDate, timeRangeMinutes: program.timeRange})
+
+if(program.compare) {
+  logger.info("Enabling role comparison.");
+  conf.compareExistingRole = true;
+}
+
+scanXrayAndSaveFiles(conf)
 .then((res) => {  
   console.log('Completed running xray scan.');  
-  if(!isEmpty(res)) {
+  if(!isEmpty(res.GeneratedPolicies)) {
     console.log("Generated IAM policies based upon xray scan:");
-    for (const arn of Object.getOwnPropertyNames(res)) {
-      console.log(`${arn} - ${res[arn]}`);
+    for (const p of res.GeneratedPolicies) {
+      console.log(`${p.Arn} - ${p.FileName}`);
     }    
   }
   else {
     console.log("No IAM policies generated");
+  }
+  if(!isEmpty(res.ExcessPermissions)) {
+    console.log("Found excessive permissions. Result written out to: ", EXCESSIVE_PERMISSION_FILE);
+  }
+  else if(program.compare){
+    console.log("No excessive permisssions found.");
   }
 })
 .catch((err) => {

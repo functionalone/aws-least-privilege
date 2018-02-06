@@ -29,3 +29,23 @@ export function extractRegionFromUrl(urlSrt: string) {
   }
   return regexMatch[1];
 }
+
+/**
+ * Check if a string starts with any of the passed strings. Returned the prefix string of undefined.
+ */
+export function startsWithAny(s: string, toCheck: string[]) {
+  return toCheck.find((v) => {
+    return s.startsWith(v);
+  });  
+}
+
+/**
+ * remove the account id (if exists) and replace with star (*)
+ */
+export function removeAccountIdFromArn(arn: string): string {
+  const match = arn.match(/arn:aws:.+?:.*?:(.+?):/);
+  if(!match || match.length < 2) { //no account
+    return arn;
+  }
+  return arn.replace(`:${match[1]}:`, ':*:');
+}

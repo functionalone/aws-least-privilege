@@ -1,6 +1,8 @@
 import {assert} from 'chai';
 import { getXrayTraces, parseXrayTrace, FunctionToActionsMap, getFunctionActionMapFromXray, 
-    ResourceActionMap, createIAMPolicyDoc } from '../lib/xray-trace-fetcher';
+    ResourceActionMap, createIAMPolicyDoc, ScanXrayTracesConf, scanXray } from '../lib/xray-trace-fetcher';
+import * as nock from 'nock';
+// import * as fs from 'fs';
 
 // tslint:disable:max-line-length
 // tslint:disable-next-line:no-var-requires
@@ -9,6 +11,15 @@ const TRACE1 = require('../../src/test/trace1.json');
 describe('xray fetch tests', function() {
 
   this.timeout(60000);
+
+  before(() => {
+    nock.load('src/test/xray-trace-fetcher.nock.json');        
+  });
+
+  // after(() => {
+  //   const nockRec = nock.recorder.play();
+  //   fs.writeFileSync('nock-xray-trace-fetcher1.rec.json', JSON.stringify(nockRec, undefined, 2));
+  // });
 
   it('getXrayTraces should fetch 6 traces', async function() {
     const traces = await getXrayTraces({
@@ -62,7 +73,23 @@ describe('xray fetch tests', function() {
     assert.isNotEmpty(doc.Statement![0].Action);
     assert.isTrue(doc.Statement![0].Action!.indexOf('s3:PutObjectTagging') >= 0);
     assert.isTrue(doc.Statement![0].Resource!.length === 2 || doc.Statement![1].Resource!.length === 2);
-    console.log('createIAMPolicyDoc:\n%s', JSON.stringify(doc, undefined, 2));
+    // console.log('createIAMPolicyDoc:\n%s', JSON.stringify(doc, undefined, 2));
+  });
+
+  it('scanXray should return policies and comparison', async function() {
+    const conf: ScanXrayTracesConf = {
+      startTime: new Date(1517785998000),
+      timeRangeMinutes: 5,
+      compareExistingRole: true,
+    };
+    const res = await scanXray(conf);
+    assert.equal(res.GeneratedPolicies.length, 5); 
+    assert.equal(res.ExcessPermissions.length, 5);
+    //verify that excess permission for update doesn't contain UpdateItem
+    const updateExcess = res.ExcessPermissions.find((e) => e.arn.endsWith('-update'));
+    assert.isNotEmpty(updateExcess);
+    assert.isUndefined(updateExcess!.excessPermissions.find((p) => (p.Action! as string[]).find((s) => s.endsWith('UpdateItem')) !== undefined));
+    // console.log('compare res: ', JSON.stringify(res.ExcessPermissions, undefined, 2));
   });
 
 });

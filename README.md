@@ -5,6 +5,10 @@ Use AWS X-Ray to reach Least Privilege.
 
 This project aims to streamline the process of collecting resource usage information from X-Ray and reaching a "Least Privilege" security posture for a given application. AWS X-Ray provides in-depth information about service API calls executed via the AWS SDK. Using this information, it is possible to build a profile of the AWS resources and actions that are actually used by an application and generate a policy document reflecting it.  The project is currently focused on AWS Lambda but can easily be applied to other applications that utilize AWS Roles (applications on EC2 or ECS).
 
+# Requirements
+
+NodeJS 6+
+
 # Installation
 
 ```
@@ -16,6 +20,30 @@ This will install the command line tool: `xray-privilege-scan`.
 # Credential Setup
 
 The cli tool uses AWS Nodejs SDK internally and will use the same credential mechanism as used by the SDK. It will automatically use credentials from the AWS shared credential file. See: [AWS SDK Docs](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) for more details. The user used to run the cli should have the AWS managed policy: `AWSXrayReadOnlyAccess`. 
+
+If using compare mode (see below) then the following inline policy should be attached to the user:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListAttachedRolePolicies",
+                "iam:ListRolePolicies",
+                "iam:GetPolicy",
+                "iam:GetPolicyVersion",
+                "iam:GetRolePolicy",
+                "lambda:GetFunctionConfiguration"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+```
 
 # X-Ray Setup
 
@@ -104,6 +132,7 @@ All command line options are optional:
     -V, --version                 output the version number
     -s, --start-time <timestamp>  Start time as Unix timestamp (seconds since 1970-01-01 00:00:00 UTC). If left out will use: (current time - time range).
     -r, --time-range <minutes>    Time range in minutes to scan from start time. (default: 60)
+    -c, --compare                 Compare current role and generated roles. Output a json report.
     -v, --verbose                 Output verbose logs to the console (info and above).
     -h, --help                    output usage information
 ```
@@ -122,4 +151,37 @@ Additionally it will printout a summary to standard out specifying the function 
 
 The policy document is a json document conforming to the AWS Policy language with an additional field of: `Description`. The `Description` field will contain the AWS ARN of the Lambda Function this policy is for. The `Description` field is not part of the AWS Policy language and should be removed if copying the policy to AWS IAM.
 
+## Supported AWS Services
 
+The following services are supported as part of an X-Ray scan (unsupported services will be ignored during a scan):
+
+* DynamoDB
+* S3
+* SQS
+* Lambda
+
+If you would like to see additional services, please let us know by openning an [issue](https://github.com/functionalone/aws-least-privilege/issues).
+
+## Compare Mode
+
+To use compare mode specify the `-c` command line option. With compare mode the tool will check what role is currently attached to a Lambda Function. It will then compare the role's permissions against the permissions discovered through the X-Ray scan. If any of the roles contain excessive permissions as compared to the permissions actually discovered in the X-Ray scan, an excessive permissions report in json format will be generated. The file will be named: `excessive_permissions.json`. The report will include an entry for each Lambda Function with the permissions found as excessive. Sample report:
+
+```json
+[
+  {
+    "arn": "arn:aws:lambda:us-east-1:123456789:function:notes-app-api-prod-delete",
+    "role": "arn:aws:iam::123456789:role/notes-app-api-prod-delete-us-east-1-lambdaRole",
+    "excessPermissions": [
+      {
+        "Action": [
+          "dynamodb:PutItem"
+        ],
+        "Resource": "arn:aws:dynamodb:us-east-1:*:table/notes",
+        "Effect": "Allow"
+      }
+    ]
+  }
+]
+```
+
+**Note:** The comparison currenlty takes into account only "Allow" statements. If the role contains a policy with "Deny" statements these will not be considered for the comparison.
