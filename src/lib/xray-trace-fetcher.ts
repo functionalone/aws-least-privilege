@@ -1,11 +1,11 @@
 import { logger } from './logger';
-import * as AWS from 'aws-sdk';
-import * as _ from 'lodash';
+import AWS from 'aws-sdk';
+import _ from 'lodash';
 import { SUPPORTED_SERVICES, AWSSegmentParsers } from './aws-segments/index';
-import * as BBPromise from 'bluebird';
+import BBPromise from 'bluebird';
 import { IamPolicyDocument, IamStatement } from './aws-segments/iam-policy';
-import * as crypto from 'crypto';
-import * as fs from 'fs';
+import crypto from 'crypto';
+import fs from 'fs';
 import {Trace} from 'aws-sdk/clients/xray';
 import { IamPolicyUtils } from './iam-policy-utils';
 

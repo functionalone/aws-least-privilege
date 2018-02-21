@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import * as program from 'commander';
+import program from 'commander';
 import { scanXrayAndSaveFiles } from '../lib/xray-trace-fetcher';
 import { logger, changeConsoleLevel } from '../lib/logger';
 import {isEmpty} from 'lodash';
