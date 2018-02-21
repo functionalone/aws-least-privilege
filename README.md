@@ -134,6 +134,7 @@ All command line options are optional:
     -r, --time-range <minutes>    Time range in minutes to scan from start time. (default: 60)
     -c, --compare                 Compare current role and generated roles. Output a json report.
     -v, --verbose                 Output verbose logs to the console (info and above).
+    -f, --filter <expression>     Filter expression to use when scanning xray. See AWS docs for synatx.
     -h, --help                    output usage information
 ```
 
@@ -185,3 +186,9 @@ To use compare mode specify the `-c` command line option. With compare mode the 
 ```
 
 **Note:** The comparison currenlty takes into account only "Allow" statements. If the role contains a policy with "Deny" statements these will not be considered for the comparison.
+
+## More Info
+
+**Detailed walk through with a sample application:** [Using AWS X-Ray to achieve Least Privilege Permissions](https://medium.com/@glicht/using-aws-x-ray-to-achieve-least-privilege-permissions-93dfd6701318)
+
+**AWS X-Ray Filter Expression Documentation:** https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html#console-filters-syntax
