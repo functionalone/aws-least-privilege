@@ -40,7 +40,8 @@ program.version(version)
   .option('-s, --start-time <timestamp>', 'Start time as Unix timestamp (seconds since 1970-01-01 00:00:00 UTC). Optional: if left out will use: (current time - time range).', parseIntWithError)
   .option('-r, --time-range <minutes>', 'Time range in minutes to scan from start time.', parseIntWithError, 60)
   .option('-c, --compare', 'Compare current role and generated roles. Output a json report.')
-  .option('-v, --verbose', 'Output verbose logs to the console (info and above).')  
+  .option('-v, --verbose', 'Output verbose logs to the console (info and above).')
+  .option('-f, --filter <expression>', 'Filter expression to use when scanning xray. See AWS docs for synatx.')
   .parse(process.argv);
 // tslint:enable:max-line-length
 
@@ -59,6 +60,7 @@ if(startTime && (startTime < (now - 30*24*60*60*1000) || startTime > (now + 60*1
 const conf: ScanXrayTracesConf = {
   startTime: startTime ? new Date(startTime) : undefined,
   timeRangeMinutes: program.timeRange,
+  filterExpression: program.filter,
 };
 
 if(program.verbose) {

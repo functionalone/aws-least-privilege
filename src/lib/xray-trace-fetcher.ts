@@ -23,6 +23,10 @@ export interface ScanXrayTracesConf {
    */
   timeRangeMinutes?: number;
   /**
+   * Filter expression as documented at: https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html#console-filters-syntax
+   */
+  filterExpression?: string;
+  /**
    * Perform comparison against the application role and generate an excess permissions report
    */
   compareExistingRole?: boolean;
@@ -42,6 +46,7 @@ export async function getXrayTraces(conf?: ScanXrayTracesConf) {
     const summariesParams: AWS.XRay.Types.GetTraceSummariesRequest = {
       StartTime,
       EndTime,
+      FilterExpression: (conf && conf.filterExpression) || undefined,
     };
     let paginationNum = 0;
     let nextToken: string | undefined;
