@@ -33,7 +33,7 @@
     "bluebird": "^3.5.1",
     "commander": "^2.14.1",
     "lodash": "^4.17.5",
-    "winston": "^2.4.0"
+    "winston": "^2.4.1"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.20",

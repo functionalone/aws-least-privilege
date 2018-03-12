@@ -101,9 +101,22 @@ export async function getXrayTraces(conf?: ScanXrayTracesConf) {
 }
 
 /**
- * Maps that maps a resource to set of actions
+ * Map that maps a resource to set of actions
  */
-export type ResourceActionMap = Map<string, Set<string>>;
+export class ResourceActionMap extends Map<string, Set<string>> {
+  constructor() {
+    super();
+  }
+
+  addActionToResource(actionOp: string, resourceArn: string) {
+    let actions = super.get(resourceArn);
+    if(!actions) {
+      actions = new Set();
+      super.set(resourceArn, actions);    
+    }
+    actions.add(actionOp);
+  }
+}
 
 /**
  * Map which maps a function to the set of ResourceActionMap
@@ -122,7 +135,7 @@ function parseSegmentDoc(doc: any, functionMap: FunctionToActionsMap, parentActi
     logger.debug('Found arn: %s for Segment: %s', arn, doc.id);
     actionsMap = functionMap.get(arn);
     if (!actionsMap) {
-      actionsMap = new Map();
+      actionsMap = new ResourceActionMap();
       functionMap.set(arn, actionsMap);
     }
   }

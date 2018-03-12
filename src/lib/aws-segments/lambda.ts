@@ -47,17 +47,12 @@ const parseSegment: SegmentParseFunc = function(segmentDoc: any, actionsMap: Res
   if(isEmpty(aws) || !aws.function_name) {
     logger.warn("Couldn't extract Lambda info for segment document: ", segmentDoc);
     return;
-  }  
+  }
   const op = OPS_REPLACERS[aws.operation] || aws.operation;
   const region = aws.region || extractRegion(functionArn);	
   //construct the arn		
   const arn = `arn:aws:lambda:${region}:*:function:${aws.function_name}`;
-  let actions = actionsMap.get(arn);
-  if(!actions) {
-    actions = new Set();
-    actionsMap.set(arn, actions);
-  }
-  actions.add(op);
+  actionsMap.addActionToResource(op, arn);
 };
 // tslint:enable:jsdoc-format
 

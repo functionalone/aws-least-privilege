@@ -8127,5 +8127,330 @@
       "Date",
       "Sun, 04 Feb 2018 23:28:36 GMT"
     ]
+  },
+  {
+    "scope": "https://xray.us-east-1.amazonaws.com:443",
+    "method": "POST",
+    "path": "/TraceSummaries",
+    "body": {
+      "StartTime": 1520850322,
+      "EndTime": 1520857522
+    },
+    "status": 200,
+    "response": {
+      "ApproximateTime": 1520856000,
+      "NextToken": "fnsaFIsTE9sgVQoYBhJOCsE30MUjU5MpEqZHvDeRvuiLyTgq8/yX++pMcSbqq4Ic",
+      "TraceSummaries": [],
+      "TracesProcessedCount": 0
+    },
+    "rawHeaders": [
+      "Date",
+      "Mon, 12 Mar 2018 12:31:57 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "154",
+      "Connection",
+      "keep-alive",
+      "x-amzn-RequestId",
+      "5ab46d59-25f1-11e8-a074-1b8de9a52290"
+    ]
+  },
+  {
+    "scope": "https://xray.us-east-1.amazonaws.com:443",
+    "method": "POST",
+    "path": "/TraceSummaries",
+    "body": {
+      "StartTime": 1520850322,
+      "EndTime": 1520857522,
+      "NextToken": "fnsaFIsTE9sgVQoYBhJOCsE30MUjU5MpEqZHvDeRvuiLyTgq8/yX++pMcSbqq4Ic"
+    },
+    "status": 200,
+    "response": {
+      "ApproximateTime": 1520853715,
+      "NextToken": "fnsaFIsTE9sgVQoYBhJOCqfkEjAFXaIbUjgs/WtgeMDFBv66mtKmEdJjk+K9ACxE",
+      "TraceSummaries": [],
+      "TracesProcessedCount": 0
+    },
+    "rawHeaders": [
+      "Date",
+      "Mon, 12 Mar 2018 12:31:57 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "157",
+      "Connection",
+      "keep-alive",
+      "x-amzn-RequestId",
+      "5aff808b-25f1-11e8-b661-d1d6b282a01f"
+    ]
+  },
+  {
+    "scope": "https://xray.us-east-1.amazonaws.com:443",
+    "method": "POST",
+    "path": "/TraceSummaries",
+    "body": {
+      "StartTime": 1520850322,
+      "EndTime": 1520857522,
+      "NextToken": "fnsaFIsTE9sgVQoYBhJOCqfkEjAFXaIbUjgs/WtgeMDFBv66mtKmEdJjk+K9ACxE"
+    },
+    "status": 200,
+    "response": {
+      "ApproximateTime": 1520852400,
+      "NextToken": "M96gZwjp1ojwwSEWzOcjMGD0J90JZ8C5lBLN9ixbuMpTbqqH+noDEWcGX3KEiYIY",
+      "TraceSummaries": [],
+      "TracesProcessedCount": 0
+    },
+    "rawHeaders": [
+      "Date",
+      "Mon, 12 Mar 2018 12:31:58 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "155",
+      "Connection",
+      "keep-alive",
+      "x-amzn-RequestId",
+      "5b43b4b6-25f1-11e8-9bb1-d3ccdb9c0ef1"
+    ]
+  },
+  {
+    "scope": "https://xray.us-east-1.amazonaws.com:443",
+    "method": "POST",
+    "path": "/TraceSummaries",
+    "body": {
+      "StartTime": 1520850322,
+      "EndTime": 1520857522,
+      "NextToken": "M96gZwjp1ojwwSEWzOcjMGD0J90JZ8C5lBLN9ixbuMpTbqqH+noDEWcGX3KEiYIY"
+    },
+    "status": 200,
+    "response": {
+      "ApproximateTime": 1520850427,
+      "NextToken": "M96gZwjp1ojwwSEWzOcjMPOgJX3FPBEux98AjUDNESX7Iyu1hw6NRwignb3+b24+",
+      "TraceSummaries": [
+        {
+          "Annotations": {},
+          "Duration": 3.739,
+          "HasError": false,
+          "HasFault": false,
+          "HasThrottle": false,
+          "Http": {
+            "ClientIp": null,
+            "HttpMethod": null,
+            "HttpStatus": 200,
+            "HttpURL": null,
+            "UserAgent": null
+          },
+          "Id": "1-5aa65bde-633e41d8bdd239c8b30729d8",
+          "IsPartial": null,
+          "ResponseTime": 3.721,
+          "ServiceIds": null,
+          "Users": []
+        }
+      ],
+      "TracesProcessedCount": 1
+    },
+    "rawHeaders": [
+      "Date",
+      "Mon, 12 Mar 2018 12:31:58 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "448",
+      "Connection",
+      "keep-alive",
+      "x-amzn-RequestId",
+      "5b8ddd4f-25f1-11e8-87aa-ed93d05cf526"
+    ]
+  },
+  {
+    "scope": "https://xray.us-east-1.amazonaws.com:443",
+    "method": "POST",
+    "path": "/TraceSummaries",
+    "body": {
+      "StartTime": 1520850322,
+      "EndTime": 1520857522,
+      "NextToken": "M96gZwjp1ojwwSEWzOcjMPOgJX3FPBEux98AjUDNESX7Iyu1hw6NRwignb3+b24+"
+    },
+    "status": 200,
+    "response": {
+      "ApproximateTime": 1520850322,
+      "NextToken": null,
+      "TraceSummaries": [],
+      "TracesProcessedCount": 0
+    },
+    "rawHeaders": [
+      "Date",
+      "Mon, 12 Mar 2018 12:31:59 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "95",
+      "Connection",
+      "keep-alive",
+      "x-amzn-RequestId",
+      "5bd0da08-25f1-11e8-987e-bb99a8bf9aab"
+    ]
+  },
+  {
+    "scope": "https://xray.us-east-1.amazonaws.com:443",
+    "method": "POST",
+    "path": "/Traces",
+    "body": {
+      "TraceIds": [
+        "1-5aa65bde-633e41d8bdd239c8b30729d8"
+      ]
+    },
+    "status": 200,
+    "response": {
+      "NextToken": null,
+      "Traces": [
+        {
+          "Duration": 3.739,
+          "Id": "1-5aa65bde-633e41d8bdd239c8b30729d8",
+          "Segments": [
+            {
+              "Document": "{\"id\":\"2aa2bda276cc1afc\",\"name\":\"nodejs-test-dev-hello\",\"start_time\":1.520851938192E9,\"end_time\":1.52085193856E9,\"parent_id\":\"2dc10c775a25bd6e\",\"aws\":{\"function_arn\":\"arn:aws:lambda:us-east-1:123456789012:function:nodejs-test-dev-hello\",\"resource_names\":[\"nodejs-test-dev-hello\"],\"account_id\":\"123456789012\"},\"trace_id\":\"1-5aa65bde-633e41d8bdd239c8b30729d8\",\"origin\":\"AWS::Lambda::Function\",\"subsegments\":[{\"id\":\"67ac154dc7ae09f5\",\"name\":\"SNS\",\"start_time\":1.520851938489E9,\"end_time\":1.520851938558E9,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"Publish\",\"region\":\"us-east-1\",\"request_id\":\"ac7a859d-3da2-5a1f-b6a0-d6bd6380f0b4\",\"retries\":0,\"topic_arn\":\"arn:aws:sns:us-east-1:123456789012:nodejs-test-topic\"},\"namespace\":\"aws\"},{\"id\":\"703e8f29211c0fb4\",\"name\":\"SNS\",\"start_time\":1.520851938421E9,\"end_time\":1.520851938488E9,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"ListSubscriptionsByTopic\",\"region\":\"us-east-1\",\"request_id\":\"fdf76e9b-a07e-5fad-b8d2-3dbbfe5cd5e8\",\"retries\":0,\"topic_arn\":\"arn:aws:sns:us-east-1:123456789012:nodejs-test-topic\"},\"namespace\":\"aws\"},{\"id\":\"24dbc1792b6d1617\",\"name\":\"SNS\",\"start_time\":1.520851938203E9,\"end_time\":1.52085193832E9,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"ListTopics\",\"region\":\"us-east-1\",\"request_id\":\"94088857-a6af-5cde-8675-db77f88d6094\",\"retries\":0},\"namespace\":\"aws\"},{\"id\":\"5b8f72fa317437de\",\"name\":\"Initialization\",\"start_time\":1.520851935373E9,\"end_time\":1.52085193819E9,\"aws\":{\"function_arn\":\"arn:aws:lambda:us-east-1:123456789012:function:nodejs-test-dev-hello\"}},{\"id\":\"6720e0557100c90f\",\"name\":\"SNS\",\"start_time\":1.52085193836E9,\"end_time\":1.520851938414E9,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"ListSubscriptions\",\"region\":\"us-east-1\",\"request_id\":\"0fbf7ca1-dd2b-53fa-b100-2f8183091fa8\",\"retries\":0},\"namespace\":\"aws\"}]}",
+              "Id": "2aa2bda276cc1afc"
+            },
+            {
+              "Document": "{\"id\":\"2dc10c775a25bd6e\",\"name\":\"nodejs-test-dev-hello\",\"start_time\":1.520851934821E9,\"end_time\":1.520851938542E9,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"request_id\":\"6ccbf59c-25e3-11e8-96d9-5bf2bb5ad857\"},\"trace_id\":\"1-5aa65bde-633e41d8bdd239c8b30729d8\",\"origin\":\"AWS::Lambda\",\"resource_arn\":\"arn:aws:lambda:us-east-1:123456789012:function:nodejs-test-dev-hello\"}",
+              "Id": "2dc10c775a25bd6e"
+            },
+            {
+              "Document": "{\"id\":\"3d145c980ae23561\",\"name\":\"SNS\",\"start_time\":1.520851938489E9,\"end_time\":1.520851938558E9,\"parent_id\":\"67ac154dc7ae09f5\",\"inferred\":true,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"Publish\",\"region\":\"us-east-1\",\"request_id\":\"ac7a859d-3da2-5a1f-b6a0-d6bd6380f0b4\",\"retries\":0,\"topic_arn\":\"arn:aws:sns:us-east-1:123456789012:nodejs-test-topic\"},\"trace_id\":\"1-5aa65bde-633e41d8bdd239c8b30729d8\",\"origin\":\"AWS::SNS\"}",
+              "Id": "3d145c980ae23561"
+            },
+            {
+              "Document": "{\"id\":\"19707f8a3e99d01d\",\"name\":\"SNS\",\"start_time\":1.520851938421E9,\"end_time\":1.520851938488E9,\"parent_id\":\"703e8f29211c0fb4\",\"inferred\":true,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"ListSubscriptionsByTopic\",\"region\":\"us-east-1\",\"request_id\":\"fdf76e9b-a07e-5fad-b8d2-3dbbfe5cd5e8\",\"retries\":0,\"topic_arn\":\"arn:aws:sns:us-east-1:123456789012:nodejs-test-topic\"},\"trace_id\":\"1-5aa65bde-633e41d8bdd239c8b30729d8\",\"origin\":\"AWS::SNS\"}",
+              "Id": "19707f8a3e99d01d"
+            },
+            {
+              "Document": "{\"id\":\"2f4d2eeb183ee65f\",\"name\":\"SNS\",\"start_time\":1.520851938203E9,\"end_time\":1.52085193832E9,\"parent_id\":\"24dbc1792b6d1617\",\"inferred\":true,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"ListTopics\",\"region\":\"us-east-1\",\"request_id\":\"94088857-a6af-5cde-8675-db77f88d6094\",\"retries\":0},\"trace_id\":\"1-5aa65bde-633e41d8bdd239c8b30729d8\",\"origin\":\"AWS::SNS\"}",
+              "Id": "2f4d2eeb183ee65f"
+            },
+            {
+              "Document": "{\"id\":\"3444714631bb125d\",\"name\":\"SNS\",\"start_time\":1.52085193836E9,\"end_time\":1.520851938414E9,\"parent_id\":\"6720e0557100c90f\",\"inferred\":true,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"ListSubscriptions\",\"region\":\"us-east-1\",\"request_id\":\"0fbf7ca1-dd2b-53fa-b100-2f8183091fa8\",\"retries\":0},\"trace_id\":\"1-5aa65bde-633e41d8bdd239c8b30729d8\",\"origin\":\"AWS::SNS\"}",
+              "Id": "3444714631bb125d"
+            }
+          ]
+        }
+      ],
+      "UnprocessedTraceIds": []
+    },
+    "rawHeaders": [
+      "Date",
+      "Mon, 12 Mar 2018 12:31:59 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "4630",
+      "Connection",
+      "keep-alive",
+      "x-amzn-RequestId",
+      "5c17ce55-25f1-11e8-a422-3d384a899f66"
+    ]
+  },
+  {
+    "scope": "https://lambda.us-east-1.amazonaws.com:443",
+    "method": "GET",
+    "path": "/2015-03-31/functions/arn%3Aaws%3Alambda%3Aus-east-1%3A123456789012%3Afunction%3Anodejs-test-dev-hello/configuration",
+    "body": "",
+    "status": 200,
+    "response": {
+      "CodeSha256": "0RjgITmdQVtKhbyBEt9D7hgeI7wcU9nwkNJFLcQAJsA=",
+      "CodeSize": 21597011,
+      "DeadLetterConfig": null,
+      "Description": "",
+      "Environment": null,
+      "FunctionArn": "arn:aws:lambda:us-east-1:123456789012:function:nodejs-test-dev-hello",
+      "FunctionName": "nodejs-test-dev-hello",
+      "Handler": "dist/main/handler.sdkHandler",
+      "KMSKeyArn": null,
+      "LastModified": "2018-03-12T10:48:12.019+0000",
+      "MasterArn": null,
+      "MemorySize": 1024,
+      "RevisionId": "e2f6a75f-d48c-4b65-9c3c-905bf3889617",
+      "Role": "arn:aws:iam::123456789012:role/nodejs-test-dev-us-east-1-lambdaRole",
+      "Runtime": "nodejs6.10",
+      "Timeout": 60,
+      "TracingConfig": {
+        "Mode": "Active"
+      },
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SecurityGroupIds": [],
+        "SubnetIds": [],
+        "VpcId": null
+      }
+    },
+    "rawHeaders": [
+      "Date",
+      "Mon, 12 Mar 2018 12:32:00 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "687",
+      "Connection",
+      "keep-alive",
+      "x-amzn-RequestId",
+      "5c9f9b5a-25f1-11e8-89aa-8b48fa0c4b16"
+    ]
+  },
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=ListRolePolicies&RoleName=nodejs-test-dev-us-east-1-lambdaRole&Version=2010-05-08",
+    "status": 200,
+    "response": "<ListRolePoliciesResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <ListRolePoliciesResult>\n    <IsTruncated>false</IsTruncated>\n    <PolicyNames>\n      <member>dev-nodejs-test-lambda</member>\n    </PolicyNames>\n  </ListRolePoliciesResult>\n  <ResponseMetadata>\n    <RequestId>5d06c262-25f1-11e8-bad3-8f5e2f2950a8</RequestId>\n  </ResponseMetadata>\n</ListRolePoliciesResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "5d06c262-25f1-11e8-bad3-8f5e2f2950a8",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "387",
+      "Date",
+      "Mon, 12 Mar 2018 12:32:00 GMT"
+    ]
+  },
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=ListAttachedRolePolicies&RoleName=nodejs-test-dev-us-east-1-lambdaRole&Version=2010-05-08",
+    "status": 200,
+    "response": "<ListAttachedRolePoliciesResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <ListAttachedRolePoliciesResult>\n    <IsTruncated>false</IsTruncated>\n    <AttachedPolicies/>\n  </ListAttachedRolePoliciesResult>\n  <ResponseMetadata>\n    <RequestId>5d078514-25f1-11e8-bc56-4dc6c66bee6e</RequestId>\n  </ResponseMetadata>\n</ListAttachedRolePoliciesResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "5d078514-25f1-11e8-bc56-4dc6c66bee6e",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "360",
+      "Date",
+      "Mon, 12 Mar 2018 12:32:00 GMT"
+    ]
+  },
+  {
+    "scope": "https://iam.amazonaws.com:443",
+    "method": "POST",
+    "path": "/",
+    "body": "Action=GetRolePolicy&PolicyName=dev-nodejs-test-lambda&RoleName=nodejs-test-dev-us-east-1-lambdaRole&Version=2010-05-08",
+    "status": 200,
+    "response": "<GetRolePolicyResponse xmlns=\"https://iam.amazonaws.com/doc/2010-05-08/\">\n  <GetRolePolicyResult>\n    <PolicyDocument>%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22logs%3ACreateLogStream%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Alogs%3Aus-east-1%3A123456789012%3Alog-group%3A%2Faws%2Flambda%2Fnodejs-test-dev-hello%3A%2A%22%5D%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22logs%3APutLogEvents%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Alogs%3Aus-east-1%3A123456789012%3Alog-group%3A%2Faws%2Flambda%2Fnodejs-test-dev-hello%3A%2A%3A%2A%22%5D%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22dynamodb%3A%2A%22%5D%2C%22Resource%22%3A%22arn%3Aaws%3Adynamodb%3Aus-east-1%3A%2A%3Atable%2F%2A%22%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22xray%3APutTelemetryRecords%22%2C%22xray%3APutTraceSegments%22%5D%2C%22Resource%22%3A%22%2A%22%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22kms%3ADecrypt%22%5D%2C%22Resource%22%3A%22arn%3Aaws%3Akms%3Aus-east-1%3A123456789012%3Akey%2Fd4171d0d-ec6a-4b16-bf8c-fa2b086875bb%22%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22s3%3AListAllMyBuckets%22%5D%2C%22Resource%22%3A%22arn%3Aaws%3As3%3A%3A%3A%2A%22%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22s3%3AGetBucketLocation%22%2C%22s3%3AListBucket%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3As3%3A%3A%3Afone-demo-test-bucket%22%2C%22arn%3Aaws%3As3%3A%3A%3Afone-demo-example%22%5D%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22s3%3A%2A%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3As3%3A%3A%3Afone-demo-test-bucket%2F%2A%22%2C%22arn%3Aaws%3As3%3A%3A%3Afone-demo-example%2F%2A%22%5D%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22lambda%3AInvokeFunction%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Alambda%3Aus-east-1%3A%2A%3Afunction%3Ajava-test-dev-hello%22%5D%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22sqs%3A%2A%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Asqs%3Aus-east-1%3A%2A%3Atest-msg-queue%22%5D%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22sns%3A%2A%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Asns%3Aus-east-1%3A123456789012%3Anodejs-test-topic%22%5D%2C%22Effect%22%3A%22Allow%22%7D%2C%7B%22Action%22%3A%5B%22sns%3AListTopics%22%2C%22sns%3AListSubscriptions%22%5D%2C%22Resource%22%3A%5B%22arn%3Aaws%3Asns%3Aus-east-1%3A%2A%3A%2A%22%5D%2C%22Effect%22%3A%22Allow%22%7D%5D%7D</PolicyDocument>\n    <RoleName>nodejs-test-dev-us-east-1-lambdaRole</RoleName>\n    <PolicyName>dev-nodejs-test-lambda</PolicyName>\n  </GetRolePolicyResult>\n  <ResponseMetadata>\n    <RequestId>5d6ef9a9-25f1-11e8-bc56-4dc6c66bee6e</RequestId>\n  </ResponseMetadata>\n</GetRolePolicyResponse>\n",
+    "rawHeaders": [
+      "x-amzn-RequestId",
+      "5d6ef9a9-25f1-11e8-bc56-4dc6c66bee6e",
+      "Content-Type",
+      "text/xml",
+      "Content-Length",
+      "2697",
+      "Vary",
+      "Accept-Encoding",
+      "Date",
+      "Mon, 12 Mar 2018 12:32:01 GMT"
+    ]
   }
 ]

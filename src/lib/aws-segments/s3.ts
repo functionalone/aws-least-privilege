@@ -79,12 +79,7 @@ const parseSegment: SegmentParseFunc = function(segmentDoc: any, actionsMap: Res
       arn = `arn:aws:s3:::${aws.bucket_name}/*`;
     }
   }
-  let actions = actionsMap.get(arn);
-  if (!actions) {
-    actions = new Set();
-    actionsMap.set(arn, actions);
-  }
-  actions.add(op);
+  actionsMap.addActionToResource(op, arn);
 };
 
 export default parseSegment;

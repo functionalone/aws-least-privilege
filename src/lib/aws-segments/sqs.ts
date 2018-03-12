@@ -81,12 +81,7 @@ const parseSegment: SegmentParseFunc = function(segmentDoc: any, actionsMap: Res
   const queueName = regexMatch[1];
   //construct the arn		
   const arn = `arn:aws:sqs:${region}:*:${queueName}`;
-  let actions = actionsMap.get(arn);
-  if(!actions) {
-    actions = new Set();
-    actionsMap.set(arn, actions);
-  }
-  actions.add(op);
+  actionsMap.addActionToResource(op, arn);
 };
 // tslint:enable:jsdoc-format
 

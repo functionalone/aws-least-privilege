@@ -51,7 +51,16 @@ Follow the [AWS X-Ray Developer Guide](https://docs.aws.amazon.com/xray/latest/d
 
 ## X-Ray Parameter Whitelist Configuration
 
-In order to capture what resources are accessed by AWS service calls, AWS X-Ray needs to be configured to send out parameter information as part of the subsegment traces. For example for DynamoDB we would want to know the Table being accessed and for S3 the Bucket and Key. AWS X-Ray currently provides default parameter info only for a limited set of services: DynamoDB, SQS, and Lambda. X-Ray does provide support for configuring additional services (such as S3) to include parameter info through a parameter whitelist configuration file. We've created separate projects to manage parameter whitelist configurations for the Java and Node X-Ray SDKs. For Python the same parameter whitelist file of Node can be used as specified below.
+In order to capture what resources are accessed by AWS service calls, AWS X-Ray needs to be configured to send out parameter information as part of the subsegment traces. For example for DynamoDB we would want to know the Table being accessed and for S3 the Bucket and Key. AWS X-Ray currently provides default parameter info only for a limited set of services: 
+
+* DynamoDB: All X-Ray SDKs
+* SQS: All X-Ray SDKs
+* Lambda: All X-Ray SDKs 
+* S3: 
+  * Node SDK: version 1.2.0 and higher. 
+  * Java SDK: As of Jan 30, 2018 has support as part of main source code, which is still not released. See [merged pull request](https://github.com/aws/aws-xray-sdk-java/pull/9).
+
+X-Ray does provide support for configuring additional services (such as S3 and SNS) to include parameter info through a parameter whitelist configuration file. We've created separate projects to manage parameter whitelist configurations for the Java and Node X-Ray SDKs. For Python the same parameter whitelist file of Node can be used as specified below.
 
 ### X-Ray SDK for Node
 
@@ -69,7 +78,7 @@ Then during the initialization of your application add the following configurati
 const AWSXRay = require('aws-xray-sdk');
 const whitelists = require('aws-xray-parameter-whitelist');
 XRay.captureAWS(require('aws-sdk')); //standard capture code of X-Ray to catch AWS SDK calls
-AWSXRay.appendAWSWhitelist(whitelists.s3_whitelist);
+AWSXRay.appendAWSWhitelist(whitelists.sns_whitelist);
 ```
 
 More info available at the project page: https://github.com/functionalone/aws-xray-parameter-whitelist-node 
@@ -160,6 +169,7 @@ The following services are supported as part of an X-Ray scan (unsupported servi
 * S3
 * SQS
 * Lambda
+* SNS
 
 If you would like to see additional services, please let us know by openning an [issue](https://github.com/functionalone/aws-least-privilege/issues).
 

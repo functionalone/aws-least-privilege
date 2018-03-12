@@ -8,5 +8,7 @@ aws-least-privilege-*.tgz
 *.policy.json
 #ignore log
 xray-scan.log
+#ignore excessive report
+excessive_permissions.json
 
 

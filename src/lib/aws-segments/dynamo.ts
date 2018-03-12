@@ -46,12 +46,7 @@ const parseSegment: SegmentParseFunc = function(segmentDoc: any, actionsMap: Res
   const region = aws.region || extractRegion(functionArn);	
   //construct the arn		
   const arn = `arn:aws:dynamodb:${region}:*:table/${aws.table_name}`;
-  let actions = actionsMap.get(arn);
-  if(!actions) {
-    actions = new Set();
-    actionsMap.set(arn, actions);
-  }
-  actions.add(aws.operation);
+  actionsMap.addActionToResource(aws.operation, arn);  
 };
 // tslint:enable:jsdoc-format
 

@@ -3,6 +3,7 @@ import { getXrayTraces, parseXrayTrace, FunctionToActionsMap, getFunctionActionM
     ResourceActionMap, createIAMPolicyDoc, ScanXrayTracesConf, scanXray } from '../lib/xray-trace-fetcher';
 import * as nock from 'nock';
 // import * as fs from 'fs';
+import { isArray } from 'util';
 
 // tslint:disable:max-line-length
 // tslint:disable-next-line:no-var-requires
@@ -13,12 +14,16 @@ describe('xray fetch tests', function() {
   this.timeout(60000);
 
   before(() => {
-    nock.load('src/test/xray-trace-fetcher.nock.json');        
+    // nock.recorder.rec({
+    //   output_objects: true,
+    // });
+    // nock.load('nock1.rec.json');
+    nock.load('src/test/xray-trace-fetcher.nock.json');    
   });
 
   // after(() => {
   //   const nockRec = nock.recorder.play();
-  //   fs.writeFileSync('nock-xray-trace-fetcher1.rec.json', JSON.stringify(nockRec, undefined, 2));
+  //   fs.writeFileSync('nock.rec.json', JSON.stringify(nockRec, undefined, 2));
   // });
 
   it('getXrayTraces should fetch 6 traces', async function() {
@@ -63,7 +68,7 @@ describe('xray fetch tests', function() {
   });
 
   it('createIAMPolicyDoc creates proper policy action', function() {
-    const map: ResourceActionMap = new Map();
+    const map = new ResourceActionMap();
     map.set("arn:aws:s3:::test-bucket/*", new Set(['PutObjectTagging', 'GetObject', 'DeleteObject', 'PutObject']));
     map.set("arn:aws:s3:::test-again/*", new Set(['PutObjectTagging', 'GetObject', 'DeleteObject', 'PutObject']));
     map.set("arn:aws:dynamodb:us-east-1:*:table/test-it", new Set(['DeleteItem', 'PutItem', 'Scan', 'GetItem']));
@@ -89,6 +94,27 @@ describe('xray fetch tests', function() {
     const updateExcess = res.ExcessPermissions.find((e) => e.arn.endsWith('-update'));
     assert.isNotEmpty(updateExcess);
     assert.isUndefined(updateExcess!.excessPermissions.find((p) => (p.Action! as string[]).find((s) => s.endsWith('UpdateItem')) !== undefined));
+    // console.log('compare res: ', JSON.stringify(res.ExcessPermissions, undefined, 2));
+  });
+
+  it('scanXray SNS should return policies and comparison', async function() {
+    const conf: ScanXrayTracesConf = {
+      startTime: new Date(1520850322000),
+      timeRangeMinutes: 120,
+      compareExistingRole: true,
+    };
+    const res = await scanXray(conf);
+    assert.equal(res.GeneratedPolicies.length, 1); 
+    assert.equal(res.ExcessPermissions.length, 1);
+    //verify that excess permission contains sns:*
+    const snsExcess = res.ExcessPermissions[0].excessPermissions.find((p) => isArray(p.Action) && ((p.Action! as string[]).find((s) => s === 'sns:*') !== undefined));
+    assert.isNotEmpty(snsExcess);
+    //policy should contain 2 statements
+    assert.equal(res.GeneratedPolicies[0].Policy.Statement!.length, 2);
+    const statementResourceSpecific = res.GeneratedPolicies[0].Policy.Statement!.find((s) => isArray(s.Resource) && s.Resource[0].endsWith('test-topic'));
+    assert.isTrue((statementResourceSpecific!.Action! as string[]).find((a) => a.endsWith("ListSubscriptionsByTopic")) !== undefined);
+    const statementGlobal = res.GeneratedPolicies[0].Policy.Statement!.find((s) => isArray(s.Resource) && s.Resource[0].endsWith(':*'));
+    assert.isTrue((statementGlobal!.Action! as string[]).find((a) => a.endsWith("ListTopics")) !== undefined);
     // console.log('compare res: ', JSON.stringify(res.ExcessPermissions, undefined, 2));
   });
 
