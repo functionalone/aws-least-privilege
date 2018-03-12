@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.8"></a>
+## [0.1.8](https://github.com/functionalone/aws-least-privilege/compare/v0.1.7...v0.1.8) (2018-03-12)
+
+
+### Features
+
+* support for sns (issue [#1](https://github.com/functionalone/aws-least-privilege/issues/1)) ([ee16055](https://github.com/functionalone/aws-least-privilege/commit/ee16055))
+
+
+
 <a name="0.1.7"></a>
 ## [0.1.7](https://github.com/functionalone/aws-least-privilege/compare/v0.1.6...v0.1.7) (2018-02-21)
 
