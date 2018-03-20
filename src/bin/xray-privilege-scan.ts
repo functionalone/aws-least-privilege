@@ -49,6 +49,8 @@ if(parseError) {
   helpError();
 }
 
+logger.info(`================== xray-privilege-scan start (${version}) ==================`);
+
 //sanity check on start time
 const now = Date.now();
 const startTime = program.startTime ? program.startTime * 1000 : undefined;
@@ -74,7 +76,7 @@ if(program.compare) {
 }
 
 scanXrayAndSaveFiles(conf)
-.then((res) => {  
+.then((res) => {
   console.log('Completed running xray scan.');  
   if(!isEmpty(res.GeneratedPolicies)) {
     console.log("Generated IAM policies based upon xray scan:");

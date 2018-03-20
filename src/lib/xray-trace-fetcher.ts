@@ -130,7 +130,7 @@ function parseSegmentDoc(doc: any, functionMap: FunctionToActionsMap, parentActi
   }
   //see if this is a Lambda function. If so it will have aws.function_arn
   const arn = _.get(doc, 'aws.function_arn');
-  let actionsMap: ResourceActionMap | undefined;
+  let actionsMap: ResourceActionMap | undefined = parentActionsMap;
   if (arn) {
     logger.debug('Found arn: %s for Segment: %s', arn, doc.id);
     actionsMap = functionMap.get(arn);

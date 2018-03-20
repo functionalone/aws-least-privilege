@@ -7,7 +7,9 @@ import { isArray } from 'util';
 
 // tslint:disable:max-line-length
 // tslint:disable-next-line:no-var-requires
-const TRACE1 = require('../../src/test/trace1.json'); 
+const TRACE1 = require('../../src/test/trace1.json');
+// tslint:disable-next-line:no-var-requires
+const TRACE2 = require('../../src/test/trace2.json');
 
 describe('xray fetch tests', function() {
 
@@ -65,6 +67,20 @@ describe('xray fetch tests', function() {
     const res = parseXrayTrace(TRACE1, map);
     assert.equal(res.size, 1);
     console.log("trace parse result: ", res);
+  });
+
+  it('parseXrayTrace should parse xray trace2 with local segment', function() {
+    const map: FunctionToActionsMap = new Map();    
+    const res = parseXrayTrace(TRACE2, map);
+    assert.equal(res.size, 1);
+    console.log("trace2 parse result: ", res);
+    for (const entry of res.entries()) {
+      assert.isTrue(entry[0].endsWith('create-func'));
+      const resource = 'arn:aws:dynamodb:us-east-2:*:table/test_table';      
+      const actions = entry[1].get(resource);
+      assert.isNotEmpty(actions);
+      assert.isTrue(actions!.has('PutItem'));
+    }
   });
 
   it('createIAMPolicyDoc creates proper policy action', function() {

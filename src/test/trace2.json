@@ -1,0 +1,18 @@
+{
+   "Id": "1-5aaf0fa0-b6e00f54192cf79a38419e0f",
+  "Duration": 0.054,
+  "Segments": [
+    {
+      "Id": "1dddb28c36a10b5f",
+      "Document": "{\"id\":\"1dddb28c36a10b5f\",\"name\":\"create-func\",\"start_time\":1.521422240428E9,\"end_time\":1.521422240475E9,\"parent_id\":\"2ccd93fcd674def0\",\"aws\":{\"function_arn\":\"arn:aws:lambda:us-east-2:123456789012:function:create-func\",\"resource_names\":[\"create-func\"],\"account_id\":\"123456789012\"},\"trace_id\":\"1-5aaf0fa0-b6e00f54192cf79a38419e0f\",\"origin\":\"AWS::Lambda::Function\",\"subsegments\":[{\"id\":\"c621666b49e08432\",\"name\":\"write_to_db\",\"start_time\":1.521422240442397E9,\"end_time\":1.521422240466434E9,\"namespace\":\"local\",\"subsegments\":[{\"id\":\"978ea7bfcb18a1ce\",\"name\":\"DynamoDB\",\"start_time\":1.5214222404426115E9,\"end_time\":1.521422240465731E9,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"PutItem\",\"region\":\"us-east-2\",\"request_id\":\"UTG51C1N4VCIH609MR13EOC237VV4KQNSO5AEMVJF66Q9ASUAAJG\",\"table_name\":\"test_table\",\"resource_names\":[\"test_table\"]},\"namespace\":\"aws\"}]}]}"
+    },
+    {
+      "Id": "2ccd93fcd674def0",
+      "Document": "{\"id\":\"2ccd93fcd674def0\",\"name\":\"create-func\",\"start_time\":1.521422240424E9,\"end_time\":1.521422240478E9,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"request_id\":\"4570e6d5-2b13-11e8-a6c2-017f0df338ce\"},\"trace_id\":\"1-5aaf0fa0-b6e00f54192cf79a38419e0f\",\"origin\":\"AWS::Lambda\",\"resource_arn\":\"arn:aws:lambda:us-east-2:123456789012:function:create-func\"}"
+    },
+    {
+      "Id": "173e447d259e7443",
+      "Document": "{\"id\":\"173e447d259e7443\",\"name\":\"DynamoDB\",\"start_time\":1.5214222404426115E9,\"end_time\":1.521422240465731E9,\"parent_id\":\"978ea7bfcb18a1ce\",\"inferred\":true,\"http\":{\"response\":{\"status\":200}},\"aws\":{\"operation\":\"PutItem\",\"region\":\"us-east-2\",\"request_id\":\"UTG51C1N4VCIH609MR13EOC237VV4KQNSO5AEMVJF66Q9ASUAAJG\",\"table_name\":\"test_table\",\"resource_names\":[\"test_table\"]},\"trace_id\":\"1-5aaf0fa0-b6e00f54192cf79a38419e0f\",\"origin\":\"AWS::DynamoDB::Table\"}"
+    }
+  ]
+}
