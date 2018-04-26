@@ -58,6 +58,7 @@ In order to capture what resources are accessed by AWS service calls, AWS X-Ray 
 * Lambda: All X-Ray SDKs 
 * S3: 
   * Node SDK: version 1.2.0 and higher. 
+  * Python SDK: version 1.0 and higher.
   * Java SDK: As of Jan 30, 2018 has support as part of main source code, which is still not released. See [merged pull request](https://github.com/aws/aws-xray-sdk-java/pull/9).
 
 X-Ray does provide support for configuring additional services (such as S3 and SNS) to include parameter info through a parameter whitelist configuration file. We've created separate projects to manage parameter whitelist configurations for the Java and Node X-Ray SDKs. For Python the same parameter whitelist file of Node can be used as specified below.
@@ -87,9 +88,9 @@ More info available at the project page: https://github.com/functionalone/aws-xr
 
 The X-Ray SDK for Python doesn't expose a direct interface to append parameter whitelist configurations as in the X-Ray Node SDK. But there is an option to modify the whitelist object of the SDK directly as suggested in the following form post: https://forums.aws.amazon.com/message.jspa?messageID=802327#802327 (Note: the `whitelist` object has moved since the post, see the code below)  The Python SDK uses the same parameter whitelist syntax as used by the X-Ray Node SDK, with a slight difference in the way operations are named. Operations are required to start with an uppercase. Use the following procedure to obtain additional parameter whitelist configurations which are not available as part of the X-Ray SDK:
 
-Copy the s3_whitelist.json from: https://github.com/functionalone/aws-xray-parameter-whitelist-node/blob/master/resources/s3_whitelist.json 
+To add support for SNS, copy the sns_whitelist.json from: https://github.com/functionalone/aws-xray-parameter-whitelist-node/blob/master/resources/sns_whitelist.json 
 
-Then during the initialization configure X-Ray to use the s3 parameter whitelist. Example code (Note: you may need to modify the path to `s3_whitelist.json`) :
+Then during the initialization configure X-Ray to use the sns parameter whitelist. Example code (Note: you may need to modify the path to `sns_whitelist.json`) :
 
 ```python
 from aws_xray_sdk.core import patch_all
@@ -97,14 +98,14 @@ from aws_xray_sdk.ext.boto_utils import whitelist
 
 patch_all() # standard patch code to catch AWS SDK calls
 
-# code to configure xray to provide parameter info for s3
-with open('./s3_whitelist.json', 'r') as data_file:
-    s3_whitelist = json.load(data_file)
-operations = s3_whitelist['services']['s3']['operations']
+# code to configure xray to provide parameter info for sns
+with open('./sns_whitelist.json', 'r') as data_file:
+    sns_whitelist = json.load(data_file)
+operations = sns_whitelist['services']['sns']['operations']
 for op in operations.keys():
     op_cap = op[:1].upper() + op[1:]
     operations[op_cap] = operations.pop(op)
-whitelist['services']['s3'] = s3_whitelist['services']['s3']
+whitelist['services']['sns'] = sns_whitelist['services']['sns']
 ```
 
 ### X-Ray SDK for Java
