@@ -221,7 +221,12 @@ export function createIAMPolicyDoc(map: ResourceActionMap, functionArn: string) 
       Resource: val.resources,
     };
     doc.Statement!.push(stm);  
-  }  
+  }
+  if(_.isEmpty(doc.Statement)) {
+    //append more details in the description
+    // tslint:disable-next-line:max-line-length
+    doc.Description += ". Note: No access to AWS resources were found for this function. It may be that X-Ray wasn't configured correctly. See: https://github.com/functionalone/aws-least-privilege#x-ray-setup on how to setup X-Ray.";
+  }
   return doc;
 }
 

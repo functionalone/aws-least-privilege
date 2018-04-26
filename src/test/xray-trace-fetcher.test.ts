@@ -85,10 +85,13 @@ describe('xray fetch tests', function() {
 
   it('createIAMPolicyDoc creates proper policy action', function() {
     const map = new ResourceActionMap();
+    //empty should add a "Note" to the description
+    let doc = createIAMPolicyDoc(map, "arn:aws:lambda:us-east-1:11223344:function:test");
+    assert.isTrue(doc.Description!.indexOf("Note: ") > 0);
     map.set("arn:aws:s3:::test-bucket/*", new Set(['PutObjectTagging', 'GetObject', 'DeleteObject', 'PutObject']));
     map.set("arn:aws:s3:::test-again/*", new Set(['PutObjectTagging', 'GetObject', 'DeleteObject', 'PutObject']));
     map.set("arn:aws:dynamodb:us-east-1:*:table/test-it", new Set(['DeleteItem', 'PutItem', 'Scan', 'GetItem']));
-    const doc = createIAMPolicyDoc(map, "arn:aws:lambda:us-east-1:11223344:function:test");
+    doc = createIAMPolicyDoc(map, "arn:aws:lambda:us-east-1:11223344:function:test");
     assert.isNotEmpty(doc.Statement);
     assert.equal(doc.Statement!.length, 2);
     assert.isNotEmpty(doc.Statement![0].Action);
