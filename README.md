@@ -1,6 +1,11 @@
 AWS Least Privilege
 ===================
 
+[![npm package][npm-image]][npm-url] 
+[![Build Status][travis-image]][travis-url] 
+[![Coverage Status][coveralls-image]][coveralls-url] 
+[![Dependencies Status][david-image]][david-url]
+
 Use AWS X-Ray to reach Least Privilege.
 
 This project aims to streamline the process of collecting resource usage information from X-Ray and reaching a "Least Privilege" security posture for a given application. AWS X-Ray provides in-depth information about service API calls executed via the AWS SDK. Using this information, it is possible to build a profile of the AWS resources and actions that are actually used by an application and generate a policy document reflecting it.  The project is currently focused on AWS Lambda but can easily be applied to other applications that utilize AWS Roles (applications on EC2 or ECS).
@@ -78,7 +83,7 @@ Then during the initialization of your application add the following configurati
 ```javascript
 const AWSXRay = require('aws-xray-sdk');
 const whitelists = require('aws-xray-parameter-whitelist');
-XRay.captureAWS(require('aws-sdk')); //standard capture code of X-Ray to catch AWS SDK calls
+AWSXRay.captureAWS(require('aws-sdk')); //standard capture code of X-Ray to catch AWS SDK calls
 AWSXRay.appendAWSWhitelist(whitelists.sns_whitelist);
 ```
 
@@ -203,3 +208,14 @@ To use compare mode specify the `-c` command line option. With compare mode the 
 **Detailed walk through with a sample application:** [Using AWS X-Ray to achieve Least Privilege Permissions](https://medium.com/@glicht/using-aws-x-ray-to-achieve-least-privilege-permissions-93dfd6701318)
 
 **AWS X-Ray Filter Expression Documentation:** https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html#console-filters-syntax
+
+[npm-image]:https://img.shields.io/npm/v/aws-least-privilege.svg
+[npm-url]:http://npmjs.org/package/aws-least-privilege
+[sls-image]:http://public.serverless.com/badges/v3.svg
+[sls-url]:http://www.serverless.com
+[travis-image]:https://travis-ci.org/functionalone/aws-least-privilege.svg?branch=master
+[travis-url]:https://travis-ci.org/functionalone/aws-least-privilege
+[david-image]:https://david-dm.org/functionalone/aws-least-privilege/status.svg
+[david-url]:https://david-dm.org/functionalone/aws-least-privilege
+[coveralls-image]:https://coveralls.io/repos/github/functionalone/aws-least-privilege/badge.svg?branch=master
+[coveralls-url]:https://coveralls.io/github/functionalone/aws-least-privilege?branch=master

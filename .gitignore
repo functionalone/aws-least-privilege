@@ -10,5 +10,6 @@ aws-least-privilege-*.tgz
 xray-scan.log
 #ignore excessive report
 excessive_permissions.json
-
-
+#coverage stuff
+coverage
+.nyc_output
