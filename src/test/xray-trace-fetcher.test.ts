@@ -130,9 +130,9 @@ describe('xray fetch tests', function() {
     assert.isNotEmpty(snsExcess);
     //policy should contain 2 statements
     assert.equal(res.GeneratedPolicies[0].Policy.Statement!.length, 2);
-    const statementResourceSpecific = res.GeneratedPolicies[0].Policy.Statement!.find((s) => isArray(s.Resource) && s.Resource[0].endsWith('test-topic'));
+    const statementResourceSpecific = res.GeneratedPolicies[0].Policy.Statement!.find((s) => isArray(s.Resource) && s.Resource![0].endsWith('test-topic'));
     assert.isTrue((statementResourceSpecific!.Action! as string[]).find((a) => a.endsWith("ListSubscriptionsByTopic")) !== undefined);
-    const statementGlobal = res.GeneratedPolicies[0].Policy.Statement!.find((s) => isArray(s.Resource) && s.Resource[0].endsWith(':*'));
+    const statementGlobal = res.GeneratedPolicies[0].Policy.Statement!.find((s) => isArray(s.Resource) && s.Resource![0].endsWith(':*'));
     assert.isTrue((statementGlobal!.Action! as string[]).find((a) => a.endsWith("ListTopics")) !== undefined);
     // console.log('compare res: ', JSON.stringify(res.ExcessPermissions, undefined, 2));
   });
