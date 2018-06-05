@@ -30,20 +30,20 @@
     "least privilege"
   ],
   "dependencies": {
-    "aws-sdk": "^2.200.0",
+    "aws-sdk": "^2.251.1",
     "bluebird": "^3.5.1",
-    "commander": "^2.14.1",
-    "lodash": "^4.17.5",
-    "winston": "^2.4.1"
+    "commander": "^2.15.1",
+    "lodash": "^4.17.10",
+    "winston": "^2.4.2"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.20",
     "@types/chai": "^4.1.2",
-    "@types/lodash": "^4.14.104",
+    "@types/lodash": "^4.14.109",
     "@types/mocha": "^2.2.48",
     "@types/nock": "^9.1.2",
-    "@types/node": "^9.4.6",
-    "@types/winston": "^2.3.8",
+    "@types/node": "^6.0.112",
+    "@types/winston": "^2.3.9",
     "chai": "^4.1.2",
     "coveralls": "^3.0.1",
     "mocha": "^5.0.1",
