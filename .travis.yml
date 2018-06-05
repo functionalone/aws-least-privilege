@@ -4,5 +4,12 @@ node_js:
   - "8"
   - "10"
 
+env:
+  global:
+    #dummy aws credentials needed as we use the aws-sdk
+    - AWS_ACCESS_KEY_ID=dummy
+    - AWS_SECRET_ACCESS_KEY=dummy
+    - AWS_REGION=us-east-1
+    
 sudo: false
 after_success: npm run coverage
