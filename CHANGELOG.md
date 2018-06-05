@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.11"></a>
+## [0.1.11](https://github.com/functionalone/aws-least-privilege/compare/v0.1.10...v0.1.11) (2018-06-05)
+
+
+### Features
+
+* support travis build and coverage reporting ([fc82935](https://github.com/functionalone/aws-least-privilege/commit/fc82935))
+* update dependencies ([08838ce](https://github.com/functionalone/aws-least-privilege/commit/08838ce))
+
+
+
 <a name="0.1.10"></a>
 ## [0.1.10](https://github.com/functionalone/aws-least-privilege/compare/v0.1.9...v0.1.10) (2018-04-26)
 
